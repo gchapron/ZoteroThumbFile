@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+  "name": "ZoteroThumbPDF",
+  "version": "1.1.2",
+  "description": "Browse all PDF pages in a full-tab contact sheet with adjustable thumbnail size.",
+  "author": "Zotero Visual Plugins contributors",
+  "applications": {
+    "zotero": {
+      "id": "pdf-page-thumbnails@zotero-visual-plugins.local",
+      "strict_min_version": "9.0",
+      "strict_max_version": "9.0.*",
+      "update_url": "https://updates.invalid/zotero-visual-plugins/pdf-page-thumbnails.json"
+    }
+  }
+}

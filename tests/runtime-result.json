@@ -1,0 +1,90 @@
+{
+  "time": "2026-09-24T20:26:44.089Z",
+  "event": "command-success",
+  "id": "continuous-ZoteroThumbPDF-runtime",
+  "artifact": "ZoteroThumbPDF-1.1.2.xpi",
+  "sha256": "210ec485f91456dcb8302b662696286f3c85954a047d85e2eda80409e453dd22",
+  "result": {
+    "passed": true,
+    "version": "9.0.6",
+    "pluginVersion": "1.1.2",
+    "evidence": [
+      "80-page PDF automatically opens as a full-reader, multi-column virtualized contact sheet",
+      "Continuous slider retains 237.25px geometry with no fixed step; display and saved preference alone round to 237px",
+      "Rapid zoom retains the same visible thumbnail until the new raster is decoded, then replaces it atomically with zero blank frames",
+      "100\u2013400px slider changes grid columns and re-renders large previews at retina resolution",
+      "Scroll reaches page 80, selecting it opens native reader page 80, and returning preserves contact-sheet scroll",
+      "Native reader sidebar and annotations layout are preserved",
+      "Mixed portrait and landscape pages keep their aspect ratios",
+      "Keyboard zoom/Escape and rapid close/reopen cancellation work",
+      "Isolated keyboard keeps selected native annotations intact on Delete/Backspace; Cmd zoom changes only the grid; Tab stays within contact sheet",
+      "Tools preference allows manual opening of new PDFs",
+      "Disable cleans overlays/styles/controls; re-enable works in existing PDFs without removing other plugins' listeners",
+      "Separate PDF reader windows display the contact sheet"
+    ],
+    "initial": {
+      "columns": 6,
+      "mountedCards": 24,
+      "scrollHeight": 4806,
+      "viewportHeight": 731
+    },
+    "zoom": {
+      "smallColumns": 10,
+      "largeColumns": 3,
+      "largeWidth": 800
+    },
+    "stressItemID": 4,
+    "tabID": "tab-nlNr3nL7"
+  },
+  "packagedArtifact": {
+    "artifact": "ZoteroThumbPDF-1.1.2.xpi",
+    "sha256": "210ec485f91456dcb8302b662696286f3c85954a047d85e2eda80409e453dd22",
+    "status": "passed"
+  },
+  "finalColdRestart": {
+    "id": "final-012-cold-cache-and-continuous-pdf",
+    "status": "passed",
+    "testedAt": "2026-09-24T20:48:13.437Z",
+    "result": {
+      "passed": true,
+      "version": "9.0.6",
+      "library": {
+        "name": "ZoteroThumbLibrary",
+        "version": "0.1.2",
+        "isActive": true,
+        "imageWidth": 360,
+        "imageHeight": 466,
+        "persistentCache": {
+          "path": "cache/zoteroThumbLibrary/v1",
+          "images": 96,
+          "renders": 0,
+          "totalMS": 59,
+          "rendererCreated": false
+        }
+      },
+      "pdf": {
+        "name": "ZoteroThumbPDF",
+        "version": "1.1.2",
+        "isActive": true,
+        "pages": 3,
+        "decodedImages": 3,
+        "fullWidth": true,
+        "continuousSlider": {
+          "step": "any",
+          "value": 237.25,
+          "cardWidth": 261.25,
+          "savedSize": 237,
+          "existingImageRetained": true
+        }
+      },
+      "wordProcessorAutoInstallersDisabled": true
+    }
+  },
+  "testApplication": {
+    "status": "cleanly-exited",
+    "testedAt": "2026-09-24T20:48:22.075Z",
+    "exitCode": 0,
+    "scope": "Only the dedicated disposable-profile Zotero process was quit.",
+    "automaticWordProcessorInstallersSkipped": true
+  }
+}
