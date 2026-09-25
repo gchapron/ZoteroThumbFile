@@ -6,9 +6,9 @@ Previously named **ZoteroThumbPDF**. Installing ZoteroThumbFile updates the exis
 
 ## Install
 
-Built for **Zotero 9.0.x** and tested inside **Zotero 9.0.6 for macOS**.
+Built for **Zotero 9.0.x and 10.0.x**. Version 1.1.5 was tested inside **Zotero 10.0.4 for macOS**, using an isolated profile and synthetic PDFs. The unchanged contact-sheet implementation was previously tested inside Zotero 9.0.6 for macOS.
 
-1. Download the `ZoteroThumbFile-1.1.4.xpi` installer from the [latest GitHub release](https://github.com/gchapron/ZoteroThumbFile/releases/latest). Choose the **XPI asset**, not a source-code archive.
+1. Download the `ZoteroThumbFile-1.1.5.xpi` installer from the [latest GitHub release](https://github.com/gchapron/ZoteroThumbFile/releases/latest). Choose the **XPI asset**, not a source-code archive.
 2. In Zotero, open **Tools → Plugins**.
 3. Choose the gear menu → **Install Plugin From File…**.
 4. Select the downloaded XPI.
@@ -58,6 +58,8 @@ Thirteen tests cover long-document geometry, last-page reachability, zoom coales
 
 `tests/runtime-result.json` preserves the actual Zotero tests from 1.1.3 with an isolated profile and synthetic files. They verified zero blank or undecoded preview frames during rapid zoom, the full 80-page grid, 100–400-pixel zoom, an 800-pixel raster, scrolling and navigation to page 80, preserving the return position, mixed page orientations, keyboard isolation with a selected annotation, manual-opening preference, disable/re-enable, and separate reader windows.
 
+`tests/zotero10-runtime-result.json` records the same comprehensive checks passing for version 1.1.5 inside Zotero 10.0.4, including fractional 237.25-pixel zoom, zero blank zoom frames, navigation to page 80, preservation of selected annotations during Delete/Backspace, separate reader windows, and a clean application restart. `tests/compatibility-zotero10-source.json` records the source-interface and installer checks.
+
 `tests/runtime-reader.js` is the integration-test body used with the disposable development harness. It requires that harness and its synthetic fixtures; it is not an installer and must not be run against a personal library. Runtime checks inspected live DOM, decoded images, and application state. Direct screenshot-based visual inspection was unavailable.
 
 ## Publish a release
@@ -70,11 +72,11 @@ Keep published version tags and assets unchanged. Publish a new version for subs
 
 ## Compatibility and maintenance
 
-The plugin uses Zotero reader internals and restricts installation to Zotero 9.0.x. Other major versions and operating systems have not been tested. Existing open PDFs receive the control when the plugin is enabled.
+The plugin uses Zotero reader internals and permits installation on Zotero 9.0.x and 10.0.x. The reader toolbar event, PDF initialization, rendering, navigation, and cleanup contracts were checked against the installed Zotero 10.0.4 source. No change to the contact-sheet implementation was needed. Other major versions and operating systems have not been tested. Existing open PDFs receive the control when the plugin is enabled.
 
 Updates are manual. Zotero requires an HTTPS update URL even for a local plugin, so the manifest uses the reserved `updates.invalid` domain without an update service. Update checks may fail harmlessly.
 
-Source contracts were checked in the installed Zotero app: `chrome/content/zotero/xpcom/reader.js`, `resource/reader/reader.js`, and `chrome/content/zotero/xpcom/plugins.js`. The plugin uses the official reader toolbar event and private reader/PDF.js access for the grid. ID-based listener cleanup avoids a faulty singular unregister method in Zotero 9.0.6.
+Source contracts were checked in the installed Zotero app: `chrome/content/zotero/xpcom/reader.js`, `resource/reader/reader.js`, `resource/reader/pdf/build/pdf.mjs`, and `chrome/content/zotero/xpcom/plugins.js`. The plugin uses the official reader toolbar event and private reader/PDF.js access for the grid. ID-based listener cleanup works on both supported major versions and avoids a faulty singular unregister method in Zotero 9.0.6.
 
 References: [Zotero plugin development](https://www.zotero.org/support/dev/client_coding/plugin_development), [reader extension hooks](https://www.zotero.org/support/dev/zotero_7_for_developers), [Zotero source](https://github.com/zotero/zotero), and [reader source](https://github.com/zotero/reader).
 

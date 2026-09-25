@@ -1,0 +1,69 @@
+{
+  "pluginVersion": "1.1.5",
+  "zoteroVersion": "10.0.4",
+  "platform": "macOS",
+  "kind": "Installed application source audit and package verification",
+  "runtimeCodeUnchangedFrom": "1.1.4",
+  "unchangedFiles": [
+    "bootstrap.js",
+    "prefs.js",
+    "LICENSE"
+  ],
+  "preservedAddonID": "pdf-page-thumbnails@zotero-visual-plugins.local",
+  "preservedPreferences": [
+    "extensions.zotero.pdfPageThumbnails.autoOpen",
+    "extensions.zotero.pdfPageThumbnails.size"
+  ],
+  "compatibility": {
+    "strict_min_version": "9.0",
+    "strict_max_version": "10.0.*"
+  },
+  "contracts": [
+    {
+      "source": "chrome/content/zotero/xpcom/reader.js",
+      "checks": [
+        "renderToolbar registration and synchronous append",
+        "ReaderInstance._initPromise and _iframeWindow",
+        "ReaderInstance._internalReader proxy",
+        "_unregisterEventListenerByPluginID retains unrelated plugin listeners"
+      ]
+    },
+    {
+      "source": "resource/reader/reader.js",
+      "checks": [
+        "_primaryView.initializedPromise resolves with PDF document ready",
+        "_primaryView._iframeWindow.PDFViewerApplication.pdfDocument",
+        "_state.primaryViewStats and pageLabels",
+        "native toolbar .end .custom-sections host"
+      ]
+    },
+    {
+      "source": "resource/reader/pdf/build/pdf.mjs",
+      "checks": [
+        "PDFPageProxy.getViewport and render(canvasContext,viewport,background)",
+        "CanvasRenderingContext2D.skipBlender for original document colors"
+      ]
+    },
+    {
+      "source": "resource/reader/reader.css",
+      "checks": [
+        "Native reader toolbar remains 41 pixels high"
+      ]
+    }
+  ],
+  "portableTests": {
+    "command": "node --test tests/plugin.test.cjs",
+    "passed": 13,
+    "failed": 0
+  },
+  "installer": {
+    "file": "ZoteroThumbFile-1.1.5.xpi",
+    "sha256": "8ba24b61a68044ba9414ac7459fa72f330f9a92b82769475fed731e12021b067",
+    "entries": [
+      "bootstrap.js",
+      "manifest.json",
+      "prefs.js",
+      "LICENSE"
+    ]
+  }
+}

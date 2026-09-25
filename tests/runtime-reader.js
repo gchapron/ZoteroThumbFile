@@ -6,7 +6,7 @@ const { AddonManager } = ChromeUtils.importESModule("resource://gre/modules/Addo
 const pluginID = "pdf-page-thumbnails@zotero-visual-plugins.local";
 const preference = "extensions.zotero.pdfPageThumbnails.autoOpen";
 const addon = await AddonManager.getAddonByID(pluginID);
-assert(addon?.isActive && addon.version === "1.1.4", "ZoteroThumbFile 1.1.4 must be installed");
+assert(addon?.isActive && addon.version === "1.1.5", "ZoteroThumbFile 1.1.5 must be installed");
 const evidence = [];
 const waitFor = async (check, label) => {
   for (let i = 0; i < 150; i++) { if (check()) return; await delay(100); }

@@ -1,0 +1,65 @@
+{
+  "passed": true,
+  "testedAt": "2026-09-25T05:25:34.337Z",
+  "zoteroVersion": "10.0.4",
+  "platform": "macOS",
+  "method": "Installed release XPI into the guarded disposable profile, exercised real Zotero UI handlers and synthetic database fixtures, then cleanly restarted Zotero. The normal profile and library were not modified.",
+  "profile": "/Users/guillaume/Documents/Codex/2026-09-24/i-wou/work/test-profile",
+  "data": "/Users/guillaume/Documents/Codex/2026-09-24/i-wou/work/test-data",
+  "zotero9Note": "No Zotero 9 runtime rerun in this update: the installed app is now 10.0.4. Earlier 9.0.6 results remain historical evidence, and portable tests cover both context interfaces.",
+  "package": {
+    "filename": "ZoteroThumbFile-1.1.5.xpi",
+    "sha256": "8ba24b61a68044ba9414ac7459fa72f330f9a92b82769475fed731e12021b067",
+    "version": "1.1.5"
+  },
+  "checks": {
+    "comprehensiveReader": {
+      "passed": true,
+      "version": "10.0.4",
+      "pluginVersion": "1.1.5",
+      "evidence": [
+        "Compact 32px toolbar removes the visible title, fits every control, and provides a named 24px icon-only close button",
+        "80-page PDF automatically opens as a full-reader, multi-column virtualized contact sheet",
+        "Continuous slider retains 237.25px geometry with no fixed step; display and saved preference alone round to 237px",
+        "Rapid zoom retains the same visible thumbnail until the new raster is decoded, then replaces it atomically with zero blank frames",
+        "100\u2013400px slider changes grid columns and re-renders large previews at retina resolution",
+        "Scroll reaches page 80, selecting it opens native reader page 80, and returning preserves contact-sheet scroll",
+        "Native reader sidebar and annotations layout are preserved",
+        "Mixed portrait and landscape pages keep their aspect ratios",
+        "Keyboard zoom/Escape and rapid close/reopen cancellation work",
+        "Isolated keyboard keeps selected native annotations intact on Delete/Backspace; Cmd zoom changes only the grid; Tab stays within contact sheet",
+        "Tools preference allows manual opening of new PDFs",
+        "Disable cleans overlays/styles/controls; re-enable works in existing PDFs without removing other plugins' listeners",
+        "Separate PDF reader windows display the contact sheet"
+      ],
+      "initial": {
+        "columns": 6,
+        "mountedCards": 24,
+        "scrollHeight": 4806,
+        "viewportHeight": 764
+      },
+      "zoom": {
+        "smallColumns": 10,
+        "largeColumns": 3,
+        "largeWidth": 800
+      },
+      "stressItemID": 4,
+      "tabID": "tab-t9m7wBj0"
+    },
+    "coldRestart": {
+      "name": "ZoteroThumbFile",
+      "version": "1.1.5",
+      "isActive": true,
+      "pages": 3,
+      "decodedImages": 3,
+      "fullWidth": true,
+      "continuousSlider": {
+        "step": "any",
+        "value": 237.25,
+        "cardWidth": 261.25,
+        "savedSize": 237,
+        "existingImageRetained": true
+      }
+    }
+  }
+}
