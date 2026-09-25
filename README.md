@@ -2,6 +2,8 @@
 
 A **Contact Sheet view for PDF tabs in Zotero**, like Contact Sheet in macOS Preview. Browse the whole file as a grid of pages, resize the thumbnails, and scroll to the final page. The grid fills the reader area and also works in separate PDF windows.
 
+![ZoteroThumbFile displaying a PDF as a contact sheet of page thumbnails, with a size slider and the item details sidebar.](docs/images/ZoteroThumbFile.png)
+
 Previously named **ZoteroThumbPDF**. Installing ZoteroThumbFile updates the existing plugin and retains its settings; the internal add-on ID is unchanged. This release provides contact sheets for PDF files.
 
 ## Install
