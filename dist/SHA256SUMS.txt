@@ -1,1 +1,1 @@
-70e5f85bcbd29f94945d4d5c194c29ff2b79b92c48fd031dabf0e97731bafce8  ZoteroThumbPDF-1.1.3.xpi
+4efd3255f6391d32dd0e0de09b213c48f9d41ac09edb4f340b4433f602876e6a  ZoteroThumbFile-1.1.4.xpi

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the ZoteroThumbPDF installer with Python's standard library."""
+"""Build the ZoteroThumbFile installer with Python's standard library."""
 import hashlib
 import json
 from pathlib import Path
@@ -17,7 +17,7 @@ def build():
     assert app["update_url"].startswith("https:")
     output = ROOT / "dist"
     output.mkdir(exist_ok=True)
-    target = output / f"ZoteroThumbPDF-{manifest['version']}.xpi"
+    target = output / f"ZoteroThumbFile-{manifest['version']}.xpi"
     with zipfile.ZipFile(target, "w") as archive:
         for name in FILES:
             info = zipfile.ZipInfo(name, (2026, 9, 24, 0, 0, 0))

@@ -1,6 +1,8 @@
-# ZoteroThumbPDF
+# ZoteroThumbFile
 
 A **Contact Sheet view for PDF tabs in Zotero**, like Contact Sheet in macOS Preview. Browse the whole file as a grid of pages, resize the thumbnails, and scroll to the final page. The grid fills the reader area and also works in separate PDF windows.
+
+Previously named **ZoteroThumbPDF**. Installing ZoteroThumbFile updates the existing plugin and retains its settings; the internal add-on ID is unchanged. This release provides contact sheets for PDF files.
 
 ## Install
 
@@ -8,7 +10,7 @@ Built for **Zotero 9.0.x** and tested inside **Zotero 9.0.6 for macOS**.
 
 1. In Zotero, open **Tools → Plugins**.
 2. Choose the gear menu → **Install Plugin From File…**.
-3. Select `dist/ZoteroThumbPDF-1.1.3.xpi`.
+3. Select `dist/ZoteroThumbFile-1.1.4.xpi`.
 4. Restart Zotero if prompted.
 
 No developer tools or external PDF renderer are needed to use the installer.
@@ -49,7 +51,9 @@ node --test tests/plugin.test.cjs
 
 Thirteen tests cover long-document geometry, last-page reachability, zoom coalescing and debouncing, atomic preview replacement, render concurrency and cancellation, cache bounds, lifecycle cleanup, and early keyboard input.
 
-`tests/runtime-result.json` records actual Zotero tests with an isolated profile and synthetic files. They verified zero blank or undecoded preview frames during rapid zoom, the full 80-page grid, 100–400-pixel zoom, an 800-pixel raster, scrolling and navigation to page 80, preserving the return position, mixed page orientations, keyboard isolation with a selected annotation, manual-opening preference, disable/re-enable, and separate reader windows.
+`tests/rename-package-result.json` records the 1.1.4 rename checks: the runtime code, add-on ID, and preferences match 1.1.3; the new installer has the updated name and version, and all 13 portable tests pass.
+
+`tests/runtime-result.json` preserves the actual Zotero tests from 1.1.3 with an isolated profile and synthetic files. They verified zero blank or undecoded preview frames during rapid zoom, the full 80-page grid, 100–400-pixel zoom, an 800-pixel raster, scrolling and navigation to page 80, preserving the return position, mixed page orientations, keyboard isolation with a selected annotation, manual-opening preference, disable/re-enable, and separate reader windows.
 
 `tests/runtime-reader.js` is the integration-test body used with the disposable development harness. It requires that harness and its synthetic fixtures; it is not an installer and must not be run against a personal library. Runtime checks inspected live DOM, decoded images, and application state. Direct screenshot-based visual inspection was unavailable.
 
