@@ -8,10 +8,11 @@ Previously named **ZoteroThumbPDF**. Installing ZoteroThumbFile updates the exis
 
 Built for **Zotero 9.0.x** and tested inside **Zotero 9.0.6 for macOS**.
 
-1. In Zotero, open **Tools → Plugins**.
-2. Choose the gear menu → **Install Plugin From File…**.
-3. Select `dist/ZoteroThumbFile-1.1.4.xpi`.
-4. Restart Zotero if prompted.
+1. Download the `ZoteroThumbFile-1.1.4.xpi` installer from the [latest GitHub release](https://github.com/gchapron/ZoteroThumbFile/releases/latest). Choose the **XPI asset**, not a source-code archive.
+2. In Zotero, open **Tools → Plugins**.
+3. Choose the gear menu → **Install Plugin From File…**.
+4. Select the downloaded XPI.
+5. Restart Zotero if prompted.
 
 No developer tools or external PDF renderer are needed to use the installer.
 
@@ -43,7 +44,9 @@ All runtime source is at the repository root. Build with Python 3:
 python3 scripts/build.py
 ```
 
-The script uses only the standard library and writes a reproducible XPI and SHA-256 checksum to `dist/`. Run the dependency-free portable tests with Node:
+The script uses only the standard library and writes a reproducible XPI and `SHA256SUMS.txt` to `dist/`. This generated directory is ignored by Git; installers and checksums are published as GitHub release assets. The source, build script, and tests remain tracked.
+
+Run the dependency-free portable tests with Node:
 
 ```sh
 node --test tests/plugin.test.cjs
@@ -56,6 +59,14 @@ Thirteen tests cover long-document geometry, last-page reachability, zoom coales
 `tests/runtime-result.json` preserves the actual Zotero tests from 1.1.3 with an isolated profile and synthetic files. They verified zero blank or undecoded preview frames during rapid zoom, the full 80-page grid, 100–400-pixel zoom, an 800-pixel raster, scrolling and navigation to page 80, preserving the return position, mixed page orientations, keyboard isolation with a selected annotation, manual-opening preference, disable/re-enable, and separate reader windows.
 
 `tests/runtime-reader.js` is the integration-test body used with the disposable development harness. It requires that harness and its synthetic fixtures; it is not an installer and must not be run against a personal library. Runtime checks inspected live DOM, decoded images, and application state. Direct screenshot-based visual inspection was unavailable.
+
+## Publish a release
+
+1. Update the manifest version and installation instructions, then run the portable tests and build above. Check the installer in an isolated Zotero profile when runtime behavior changes.
+2. Commit the source and documentation, tag that commit as `v<version>`, and push the commit and tag to GitHub.
+3. Create a GitHub release from that tag with release notes. Attach `dist/ZoteroThumbFile-<version>.xpi` and `dist/SHA256SUMS.txt` as assets.
+
+Keep published version tags and assets unchanged. Publish a new version for subsequent changes. GitHub releases provide downloads; they do not enable automatic updates in Zotero.
 
 ## Compatibility and maintenance
 

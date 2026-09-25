@@ -1,1 +1,0 @@
-4efd3255f6391d32dd0e0de09b213c48f9d41ac09edb4f340b4433f602876e6a  ZoteroThumbFile-1.1.4.xpi
