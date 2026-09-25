@@ -6,7 +6,7 @@ const { AddonManager } = ChromeUtils.importESModule("resource://gre/modules/Addo
 const pluginID = "pdf-page-thumbnails@zotero-visual-plugins.local";
 const preference = "extensions.zotero.pdfPageThumbnails.autoOpen";
 const addon = await AddonManager.getAddonByID(pluginID);
-assert(addon?.isActive && addon.version === "1.1.2", "Contact Sheet 1.1.2 must be installed");
+assert(addon?.isActive && addon.version === "1.1.3", "Contact Sheet 1.1.3 must be installed");
 const evidence = [];
 const waitFor = async (check, label) => {
   for (let i = 0; i < 150; i++) { if (check()) return; await delay(100); }
@@ -36,6 +36,27 @@ const slider = doc.getElementById("zvp-contact-size");
 const button = hostDoc.getElementById("zvp-page-thumbnails-toggle");
 await waitFor(() => sheet?.getAttribute("data-page-count") === "80" && doc.querySelector(".zvp-contact-page img"), "80-page contact sheet initial rendering");
 assert(!sheet.hidden, "Contact sheet opens automatically");
+const header = doc.querySelector('.zvp-contact-header');
+const headerRect = header.getBoundingClientRect();
+assert(headerRect.height === 32, "Contact-sheet toolbar is exactly 32px including its border");
+assert(!header.querySelector('.zvp-contact-heading,strong'), "No visible Contact Sheet heading remains");
+assert(!header.textContent.includes('Contact Sheet'), "Toolbar has no visible Contact Sheet title");
+assert(sheet.getAttribute('aria-label') === 'PDF Contact Sheet', "Contact sheet retains its accessible name");
+assert(header.querySelector('.zvp-contact-status').textContent === '80 pages', "Toolbar shows a concise page count");
+for (let control of header.querySelectorAll('input,output,button')) {
+  let rect=control.getBoundingClientRect();
+  assert(rect.top>=headerRect.top && rect.bottom<=headerRect.bottom, "Compact controls fit within the 32px toolbar");
+}
+const closeButton = header.querySelector('.zvp-contact-close');
+assert(closeButton.getBoundingClientRect().height === 24 && closeButton.getBoundingClientRect().width === 24, "Close control is exactly 24 by 24 pixels");
+assert(closeButton.textContent.trim() === "" && closeButton.querySelector('svg path'), "Close control shows only the cross icon");
+assert(closeButton.getAttribute('aria-label') === 'Close contact sheet', "Icon-only close control has an accessible name");
+assert(closeButton.getAttribute('title').includes('Escape'), "Close control tooltip explains its keyboard shortcut");
+closeButton.click();
+assert(frame.hidden && sheet.hidden, "Close icon returns to the native PDF reader");
+button.click();
+await waitFor(() => !frame.hidden && !sheet.hidden, "reopen after close icon");
+evidence.push("Compact 32px toolbar removes the visible title, fits every control, and provides a named 24px icon-only close button");
 assert(frame.getBoundingClientRect().width >= reader._iframeWindow.innerWidth - 2, "Contact sheet spans reader width");
 assert(frame.getBoundingClientRect().height >= reader._iframeWindow.innerHeight - 45, "Contact sheet spans reader content height");
 assert(+grid.getAttribute("data-columns") > 1, "Contact sheet has multiple columns");

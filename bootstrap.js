@@ -106,11 +106,10 @@ var PageThumbnails = {
     overlay.setAttribute("role", "region");
     overlay.setAttribute("aria-label", "PDF Contact Sheet");
     let header = el("div", "zvp-contact-header");
-    let title = el("div", "zvp-contact-heading");
-    title.append(el("strong", "", "Contact Sheet"));
     let status = el("span", "zvp-contact-status", "Loading pages…");
-    title.append(status);
-    let zoom = el("label", "zvp-contact-zoom", "Thumbnail size");
+    status.setAttribute("role", "status");
+    status.setAttribute("title", "Select a page to read");
+    let zoom = el("label", "zvp-contact-zoom", "Size");
     let slider = el("input");
     slider.id = "zvp-contact-size";
     slider.type = "range";
@@ -119,10 +118,20 @@ var PageThumbnails = {
     slider.step = "any";
     slider.setAttribute("aria-label", "Thumbnail size");
     let sizeLabel = el("output");
-    let close = el("button", "zvp-contact-close", "Return to PDF");
+    let close = el("button", "zvp-contact-close");
     close.type = "button";
+    close.setAttribute("aria-label", "Close contact sheet");
+    close.setAttribute("title", "Close contact sheet (Escape)");
+    let closeIcon = doc.createElementNS("http://www.w3.org/2000/svg", "svg");
+    closeIcon.setAttribute("viewBox", "0 0 16 16");
+    closeIcon.setAttribute("aria-hidden", "true");
+    closeIcon.setAttribute("focusable", "false");
+    let closePath = doc.createElementNS("http://www.w3.org/2000/svg", "path");
+    for (let [name, value] of Object.entries({ d: "M4 4l8 8m0-8-8 8", fill: "none", stroke: "currentColor", "stroke-width": 1.5, "stroke-linecap": "round" })) closePath.setAttribute(name, value);
+    closeIcon.append(closePath);
+    close.append(closeIcon);
     zoom.append(slider, sizeLabel);
-    header.append(title, zoom, close);
+    header.append(status, zoom, close);
     let scroll = el("div", "zvp-contact-scroll");
     scroll.id = "zvp-contact-scroll";
     scroll.tabIndex = 0;
@@ -139,14 +148,15 @@ var PageThumbnails = {
       html,body{margin:0;height:100%;color-scheme:light dark}
       #zvp-contact-sheet{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;background:var(--material-background,#f0f0f2);color:var(--fill-primary,#252528);font:13px -apple-system,BlinkMacSystemFont,sans-serif}
       #zvp-contact-sheet[hidden]{display:none!important}
-      .zvp-contact-header{display:flex;align-items:center;gap:24px;flex:none;min-height:65px;padding:10px 22px;border-bottom:1px solid var(--color-panedivider,#ccc);background:var(--material-toolbar,#fafafa);box-sizing:border-box}
-      .zvp-contact-heading{display:flex;flex-direction:column;gap:5px;margin-right:auto}
-      .zvp-contact-heading strong{font-size:16px;font-weight:600}
-      .zvp-contact-status{opacity:.68;font-size:12px}
-      .zvp-contact-zoom{display:flex;align-items:center;gap:10px;white-space:nowrap}
-      .zvp-contact-zoom input{width:140px;accent-color:#3277cd}
-      .zvp-contact-zoom output{width:42px;font-variant-numeric:tabular-nums}
-      .zvp-contact-close{padding:7px 12px;border-radius:6px;border:1px solid #8886;background:var(--material-button,#fff);color:inherit;white-space:nowrap;cursor:pointer}
+      .zvp-contact-header{display:flex;align-items:center;gap:10px;flex:0 0 32px;height:32px;min-height:32px;padding:0 12px;border-bottom:1px solid var(--color-panedivider,#0002);background:var(--material-toolbar,#fafafa);box-sizing:border-box}
+      .zvp-contact-status{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;font-weight:500;line-height:18px;color:var(--fill-secondary,#666)}
+      .zvp-contact-zoom{display:flex;align-items:center;flex:none;gap:6px;font-size:11px;line-height:18px;white-space:nowrap}
+      .zvp-contact-zoom input{width:90px;height:18px;margin:0;accent-color:#3277cd}
+      .zvp-contact-zoom output{min-width:38px;text-align:right;font-variant-numeric:tabular-nums}
+      .zvp-contact-close{display:inline-flex;align-items:center;justify-content:center;flex:none;width:24px;height:24px;padding:0;box-sizing:border-box;border-radius:5px;border:1px solid var(--fill-quinary,#0003);background:var(--material-button,#fff);color:inherit;cursor:pointer}
+      .zvp-contact-close svg{display:block;width:16px;height:16px;pointer-events:none}
+      .zvp-contact-close:hover{background:var(--material-hover,#f0f2f5)}
+      .zvp-contact-close:focus-visible,.zvp-contact-zoom input:focus-visible{outline:2px solid #3277cd;outline-offset:1px}
       .zvp-contact-scroll{overflow:auto;min-height:0;flex:1;overscroll-behavior:contain;position:relative;outline:none}
       .zvp-contact-grid{position:relative;width:100%;min-height:100%}
       .zvp-contact-page{position:absolute;margin:0;padding:12px 12px 6px;display:flex;flex-direction:column;align-items:center;gap:9px;box-sizing:border-box;border:2px solid transparent;border-radius:8px;color:inherit;background:transparent;cursor:pointer;font:inherit}
@@ -156,7 +166,8 @@ var PageThumbnails = {
       .zvp-contact-image img{display:block;max-width:100%;max-height:100%;object-fit:contain;box-shadow:0 2px 9px #0003;background:white}
       .zvp-contact-placeholder{display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:#fff9;color:#555;border:1px solid #8883;font-size:12px}
       .zvp-contact-page-label{font-variant-numeric:tabular-nums;line-height:18px}
-      @media(max-width:650px){.zvp-contact-header{gap:10px;padding:10px}.zvp-contact-zoom{font-size:0;gap:4px}.zvp-contact-zoom input{width:90px}.zvp-contact-zoom output{font-size:12px}.zvp-contact-status{max-width:180px}}
+      @media(max-width:420px){.zvp-contact-header{gap:8px;padding:0 8px}.zvp-contact-zoom{font-size:0;gap:4px}.zvp-contact-zoom input{width:70px}.zvp-contact-zoom output{font-size:11px}}
+      @media(prefers-color-scheme:dark){#zvp-contact-sheet{background:var(--material-background,#242426);color:var(--fill-primary,#ececef)}.zvp-contact-header{background:var(--material-toolbar,#2c2c2e);border-bottom-color:#ffffff1a}.zvp-contact-status{color:var(--fill-secondary,#b7b7bd)}.zvp-contact-close{background:var(--material-button,#3a3a3c);border-color:#ffffff24}.zvp-contact-close:hover{background:var(--material-hover,#464649)}}
     `;
     // A separate browsing context isolates contact-sheet keystrokes from the
     // native reader's window-capture annotation delete and PDF zoom shortcuts.
@@ -217,10 +228,13 @@ var PageThumbnails = {
       record.count = record.pdf.numPages;
       record.ready = true;
       record.overlay.setAttribute("data-page-count", String(record.count));
-      record.status.textContent = `${record.count} pages · Select a page to read`;
+      record.status.textContent = `${record.count} ${record.count === 1 ? "page" : "pages"}`;
       this.layout(record);
     }).catch(error => {
-      if (!record.disposed) record.status.textContent = "Could not load pages. Return to PDF and reopen Contact Sheet.";
+      if (!record.disposed) {
+        record.status.textContent = "Could not load pages";
+        record.status.setAttribute("title", "Return to PDF and reopen Contact Sheet.");
+      }
       Zotero.logError(error);
     });
   },
@@ -246,7 +260,7 @@ var PageThumbnails = {
           for (let cell of record.cells.values()) { cell.node.remove(); }
           record.cells.clear();
           record.overlay.setAttribute("data-page-count", String(record.count));
-          record.status.textContent = `${record.count} pages · Select a page to read`;
+          record.status.textContent = `${record.count} ${record.count === 1 ? "page" : "pages"}`;
         }
       }
       this.layout(record);

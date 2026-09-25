@@ -1,14 +1,13 @@
 {
-  "time": "2026-09-24T20:26:44.089Z",
+  "time": "2026-09-25T04:21:36.822Z",
   "event": "command-success",
-  "id": "continuous-ZoteroThumbPDF-runtime",
-  "artifact": "ZoteroThumbPDF-1.1.2.xpi",
-  "sha256": "210ec485f91456dcb8302b662696286f3c85954a047d85e2eda80409e453dd22",
+  "id": "compact-cross-runtime-PDF",
   "result": {
     "passed": true,
     "version": "9.0.6",
-    "pluginVersion": "1.1.2",
+    "pluginVersion": "1.1.3",
     "evidence": [
+      "Compact 32px toolbar removes the visible title, fits every control, and provides a named 24px icon-only close button",
       "80-page PDF automatically opens as a full-reader, multi-column virtualized contact sheet",
       "Continuous slider retains 237.25px geometry with no fixed step; display and saved preference alone round to 237px",
       "Rapid zoom retains the same visible thumbnail until the new raster is decoded, then replaces it atomically with zero blank frames",
@@ -26,7 +25,7 @@
       "columns": 6,
       "mountedCards": 24,
       "scrollHeight": 4806,
-      "viewportHeight": 731
+      "viewportHeight": 764
     },
     "zoom": {
       "smallColumns": 10,
@@ -34,57 +33,39 @@
       "largeWidth": 800
     },
     "stressItemID": 4,
-    "tabID": "tab-nlNr3nL7"
+    "tabID": "tab-kDH6zKU9"
   },
-  "packagedArtifact": {
-    "artifact": "ZoteroThumbPDF-1.1.2.xpi",
-    "sha256": "210ec485f91456dcb8302b662696286f3c85954a047d85e2eda80409e453dd22",
-    "status": "passed"
-  },
+  "artifact": "ZoteroThumbPDF-1.1.3.xpi",
+  "sha256": "70e5f85bcbd29f94945d4d5c194c29ff2b79b92c48fd031dabf0e97731bafce8",
   "finalColdRestart": {
-    "id": "final-012-cold-cache-and-continuous-pdf",
+    "id": "revision-final-cold-013-113",
     "status": "passed",
-    "testedAt": "2026-09-24T20:48:13.437Z",
+    "testedAt": "2026-09-25T04:25:08.532Z",
     "result": {
       "passed": true,
-      "version": "9.0.6",
       "library": {
-        "name": "ZoteroThumbLibrary",
-        "version": "0.1.2",
-        "isActive": true,
-        "imageWidth": 360,
-        "imageHeight": 466,
-        "persistentCache": {
-          "path": "cache/zoteroThumbLibrary/v1",
-          "images": 96,
-          "renders": 0,
-          "totalMS": 59,
-          "rendererCreated": false
-        }
+        "version": "0.1.3",
+        "active": true,
+        "persistentEPUBImages": 4,
+        "renders": 0,
+        "stylesheetURLHasVersion": true
       },
       "pdf": {
-        "name": "ZoteroThumbPDF",
-        "version": "1.1.2",
-        "isActive": true,
-        "pages": 3,
-        "decodedImages": 3,
-        "fullWidth": true,
-        "continuousSlider": {
-          "step": "any",
-          "value": 237.25,
-          "cardWidth": 261.25,
-          "savedSize": 237,
-          "existingImageRetained": true
-        }
+        "version": "1.1.3",
+        "active": true,
+        "images": 3,
+        "headerHeight": 32,
+        "closeIconSize": 24,
+        "redundantHeading": false,
+        "continuousSize": 237.25
       },
       "wordProcessorAutoInstallersDisabled": true
     }
   },
   "testApplication": {
     "status": "cleanly-exited",
-    "testedAt": "2026-09-24T20:48:22.075Z",
     "exitCode": 0,
-    "scope": "Only the dedicated disposable-profile Zotero process was quit.",
-    "automaticWordProcessorInstallersSkipped": true
+    "testedAt": "2026-09-25T04:25:12.015Z",
+    "scope": "Only the disposable Zotero test process was closed."
   }
 }

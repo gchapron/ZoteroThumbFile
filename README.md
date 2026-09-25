@@ -8,19 +8,19 @@ Built for **Zotero 9.0.x** and tested inside **Zotero 9.0.6 for macOS**.
 
 1. In Zotero, open **Tools → Plugins**.
 2. Choose the gear menu → **Install Plugin From File…**.
-3. Select `dist/ZoteroThumbPDF-1.1.2.xpi`.
+3. Select `dist/ZoteroThumbPDF-1.1.3.xpi`.
 4. Restart Zotero if prompted.
 
 No developer tools or external PDF renderer are needed to use the installer.
 
 ## Use
 
-- Open a PDF to see its contact sheet automatically.
+- Open a PDF to see its contact sheet automatically. Its compact 32-pixel toolbar shows the page count, size control, and close icon without a large title.
 - Scroll through all pages. The grid loads nearby thumbnails as needed. Existing previews remain visible during zoom; sharper replacements appear only after they finish decoding.
-- Use **Thumbnail size** to zoom continuously between 100 and 400 pixels, without 10-pixel snapping. You can also use **⌘+**, **⌘−**, and **⌘0** to reset the size.
+- Use **Size** to zoom continuously between 100 and 400 pixels, without 10-pixel snapping. You can also use **⌘+**, **⌘−**, and **⌘0** to reset the size.
 - Click a page to read it in Zotero's normal reader. Click the page-grid button in the reader toolbar to return to the sheet; your scroll position is retained.
 - Use arrow keys, Home, and End to move between pages, and Enter to open the selected page.
-- Press Escape or choose **Return to PDF** to return to the reader.
+- Press Escape or click the **×** close button to return to the reader.
 - Uncheck **Tools → Open PDFs in Contact Sheet** to open new PDFs normally and use the toolbar button to enter the sheet manually.
 
 Disabling the plugin removes its grid and controls and restores the normal reader. It does not modify PDF files, annotations, or the underlying sidebar configuration. EPUBs and web snapshots are not affected.
